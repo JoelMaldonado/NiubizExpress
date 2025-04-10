@@ -15,30 +15,45 @@ app.post("/api/niubiz-token-callback", async (req, res) => {
 
   // Construimos un HTML simple con el contenido recibido
   const htmlResponse = `
-      <html>
-        <head>
-          <title>Niubiz Callback</title>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              padding: 2rem;
-              background-color: #f8f8f8;
-              color: #333;
-            }
-            pre {
-              background: #fff;
-              padding: 1rem;
-              border: 1px solid #ccc;
-              overflow-x: auto;
-            }
-          </style>
-        </head>
-        <body>
-          <h1>✅ Todo está bien</h1>
-          <p>Este es el body recibido:</p>
-          <pre>${JSON.stringify(body, null, 2)}</pre>
-        </body>
-      </html>
+     <html>
+  <head>
+    <title>Niubiz Callback</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        background-color: #f8f8f8;
+        color: #333;
+      }
+      pre {
+        background: #fff;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        overflow-x: auto;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #008CBA;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+    </style>
+    <script type="text/javascript">
+      function continuar() {
+        NiubizChannel.postMessage("listo"); // mensaje simple
+      }
+    </script>
+  </head>
+  <body>
+    <h1>✅ Todo está bien</h1>
+    <p>Este es el body recibido:</p>
+    <pre>${JSON.stringify(body, null, 2)}</pre>
+    <button onclick="continuar()">Continuar</button>
+  </body>
+</html>
     `;
   res.status(200).send(htmlResponse);
 });
